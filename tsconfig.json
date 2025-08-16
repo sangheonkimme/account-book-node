@@ -10,6 +10,7 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node"
   },
+  "files": ["src/types/express.d.ts"], // prisma user 타입 의존성 추가
   "include": ["src"],
   "exclude": ["node_modules"]
 }
