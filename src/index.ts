@@ -1,17 +1,19 @@
 import express from "express";
+import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.routes";
 import accountBookRoutes from "./routes/accountBook.routes";
 import { prisma } from "./prisma/client";
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3002;
 
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/auth", authRoutes);
-app.use("/account-book", accountBookRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/account-book", accountBookRoutes);
 
 const checkDBConnection = async () => {
   try {

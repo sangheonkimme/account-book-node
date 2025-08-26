@@ -10,3 +10,12 @@ export const generateAccessToken = (userId: number) => {
 export const generateRefreshToken = (userId: number) => {
   return jwt.sign({ userId }, REFRESH_TOKEN_SECRET, { expiresIn: "7d" });
 };
+
+export const verifyAccessToken = (token: string) => {
+  type TAccessToken = { userId: number; iat: number; exp: number };
+  return jwt.verify(token, ACCESS_TOKEN_SECRET) as TAccessToken;
+};
+
+export const verifyRefreshToken = (token: string) => {
+  return jwt.verify(token, REFRESH_TOKEN_SECRET);
+};

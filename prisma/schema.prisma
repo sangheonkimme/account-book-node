@@ -9,6 +9,7 @@ generator client {
 
 model User {
   id         Int           @id @default(autoincrement())
+  userId     String        @unique
   email      String        @unique
   name       String
   phone      String?
@@ -21,11 +22,12 @@ model User {
 
 model AccountBook {
   id          Int      @id @default(autoincrement())
-  date        DateTime
+  date        String
   description String
   amount      Float
   type        String
-  user        User     @relation(fields: [userId], references: [id])
-  userId      Int
+  order       Int?
+  user        User     @relation(fields: [userId], references: [userId])
+  userId      String
   createdAt   DateTime @default(now())
 }
