@@ -15,7 +15,7 @@ router.use(authenticate);
 router.get("/", getMyAccountBooks);
 router.post("/", createAccountBook);
 router.patch("/reorder", reorderAccountBooks);
-router.put("/:id", updateAccountBook);
+router.patch("/:id", updateAccountBook);
 router.delete("/:id", deleteAccountBook);
 
 export default router;

@@ -3,6 +3,7 @@ import { prisma } from "../prisma/client";
 import {
   accountBookSchema,
   reorderAccountBookSchema,
+  updateAccountBookSchema,
 } from "../schemas/accountBook.schema";
 
 export const getMyAccountBooks = async (req: Request, res: Response) => {
@@ -37,7 +38,7 @@ export const createAccountBook = async (req: Request, res: Response) => {
 export const updateAccountBook = async (req: Request, res: Response) => {
   const userId = req.user.userId;
   const { id } = req.params;
-  const validated = accountBookSchema.parse(req.body);
+  const validated = updateAccountBookSchema.parse(req.body);
 
   const accountBook = await prisma.accountBook.findUnique({
     where: { id: Number(id) },
