@@ -26,6 +26,7 @@ model AccountBook {
   description String
   amount      Float
   type        String
+  classification String?
   order       Int?
   user        User     @relation(fields: [userId], references: [userId])
   userId      String
