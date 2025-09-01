@@ -12,7 +12,7 @@ export const getMyAccountBooks = async (req: Request, res: Response) => {
   const userId = req.user.userId;
   const data = await prisma.accountBook.findMany({
     where: { userId },
-    orderBy: { order: "asc" },
+    orderBy: { order: "desc" },
   });
 
   res.json(data);
@@ -87,14 +87,14 @@ export const reorderAccountBooks = async (req: Request, res: Response) => {
   const userId = req.user.userId;
   const { orderedIds } = reorderAccountBookSchema.parse(req.body);
 
-  const updates = orderedIds.map((id, index) =>
-    prisma.accountBook.update({
-      where: { id, userId },
-      data: { order: index + 1 },
-    })
+  await prisma.$transaction(
+    orderedIds.map((id, index) =>
+      prisma.accountBook.update({
+        where: { id, userId },
+        data: { order: orderedIds.length - index },
+      })
+    )
   );
-
-  await prisma.$transaction(updates);
 
   res.status(200).json({ message: "Reordered successfully" });
 };
