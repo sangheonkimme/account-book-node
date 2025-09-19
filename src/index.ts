@@ -8,18 +8,7 @@ import { prisma } from "./prisma/client";
 const app = express();
 const port = process.env.PORT || 3002;
 
-const allowedOrigins = [
-  "https://account-book-next-eight.vercel.app", // Vercel 도메인
-  "http://localhost:3000", // 로컬 개발용
-];
-
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true, // 쿠키, Authorization 허용
-  })
-);
-
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
